@@ -38,7 +38,19 @@ class Graph:
     def __str__(self):
         return str(self.nodes)
 
-    def dephFirstSearch(self, node):
+    def dephSearchFirst(self, node, targetNode):
+        node["visited"] = True
+
+        print("Node:  {} {} ".format(node["name"], node["data"]))
+
+        for edgeNode in node["edges"]:
+            if not edgeNode["visited"]:
+                if edgeNode["name"] == targetNode:
+                    print("Node: {} found!".format(edgeNode["name"]))
+                    return
+                else:
+                    self.dephSearchFirst(edgeNode, targetNode)
+
         
 
     
