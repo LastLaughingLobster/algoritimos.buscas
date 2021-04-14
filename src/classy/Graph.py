@@ -8,7 +8,8 @@ class Graph:
         self.nodes.append({
             "data" : data, 
             "edges" : edges, 
-            "name" : self._getNodeName()
+            "name" : self._getNodeName(),
+            "visited" : False
             })
     
     def createEdge(self, node1, node2):
@@ -17,8 +18,12 @@ class Graph:
             return
         node1['edges'] = node1['edges'] + [node2]
         node2['edges'] = node2['edges'] + [node1]
-    
 
+    def createEdgeByName(self, node1Name, node2Name):
+        node1 = self.getNodeByName(node1Name)
+        node2 = self.getNodeByName(node2Name)
+        self.createEdge(node1, node2)
+    
     def _getNodeName(self):
         out = chr(self._nameCounter)
         self._nameCounter += 1
@@ -32,6 +37,8 @@ class Graph:
 
     def __str__(self):
         return str(self.nodes)
+
+    def dephFirstSearch(self, node):
         
 
     
