@@ -20,10 +20,14 @@ def showDephSearchImplementation():
     g.createEdgeByName('D', 'D')
     g.createEdgeByName('E', 'D')
 
-    nodeToSearch = g.getNodeByName('D')
-    targetNode = 'E'
+    nodeToSearch = g.getNodeByName('C')
 
-    print("DFS Starting by node {}".format(nodeToSearch["name"]))
-    g.dephSearchFirst(nodeToSearch, targetNode)
+    print("Depth Search First")
+    g.depthSearchFirst(nodeToSearch)
+
+    print()
+
+    print("Breadth Seart")
+    g.breadthSearchFirst(nodeToSearch)
 
 main()

@@ -1,6 +1,5 @@
 class Graph:
     def __init__(self):
-        self.size = 0
         self.nodes = []
         self._nameCounter = 65 #ASCII CODE
     
@@ -38,18 +37,55 @@ class Graph:
     def __str__(self):
         return str(self.nodes)
 
-    def dephSearchFirst(self, node, targetNode):
+    def _rebaseVisited(self):
+        for node in self.nodes:
+            node["visited"] = False
+
+    def depthSearchFirst(self, node, targetNode = None):
+        self._rebaseVisited()
+        self.depthSearch(node, targetNode)
+
+    def depthSearch(self, node, targetNode):
+        targetMode = (targetNode is not None)
+
         node["visited"] = True
 
         print("Node:  {} {} ".format(node["name"], node["data"]))
 
         for edgeNode in node["edges"]:
             if not edgeNode["visited"]:
-                if edgeNode["name"] == targetNode:
+                if edgeNode["name"] == targetNode and targetMode:
                     print("Node: {} found!".format(edgeNode["name"]))
                     return
-                else:
-                    self.dephSearchFirst(edgeNode, targetNode)
+
+                self.depthSearch(edgeNode, targetNode)
+
+    def breadthSearchFirst(self, node, targetNode = None):
+        self._rebaseVisited()
+        self.breadthSearch(node, targetNode)
+
+    def breadthSearch(self, node, targetNode):
+        targetMode = (targetNode is not None)
+
+        node["visited"] = True
+
+        queue = []
+        queue.append(node)
+
+        while queue:
+            node = queue.pop(0)
+            print("Node: {} {}".format(node["name"], node["data"]))
+
+            for edgeNode in node["edges"]:
+                if not edgeNode["visited"]:
+                    if edgeNode["name"] == targetNode and targetMode:
+                        print("Node: {} found!".format(edgeNode["name"]))
+                        return
+                    queue.append(edgeNode)
+                    edgeNode["visited"] = True
+
+
+
 
         
 
